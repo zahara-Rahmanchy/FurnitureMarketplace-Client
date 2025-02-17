@@ -10,7 +10,8 @@ export function FAQComponent() {
   const [alwaysOpen, setAlwaysOpen] = React.useState(true);
 
   const handleAlwaysOpen = () => setAlwaysOpen(cur => !cur);
-  const handleOpen = value => setOpen(open === value ? 0 : value);
+  const handleOpen = (value: React.SetStateAction<number>) =>
+    setOpen(open === value ? 0 : value);
 
   return (
     <section className="md:w-[70%] mx-auto text-brown-800 font-serif">
