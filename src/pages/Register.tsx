@@ -30,6 +30,7 @@ const Register = () => {
     <>
       {" "}
       <div>
+        <div className=" bg-brown-800 w-full min-h-[90px]"></div>
         <Card
           className="flex flex-col items-center justify-center  h-screen"
           placeholder={""}
