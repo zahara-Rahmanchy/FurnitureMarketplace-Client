@@ -6,7 +6,7 @@ import {
   IconButton,
   Button,
 } from "@material-tailwind/react";
-import {NavLink} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 // import type {NavbarProps} from "@material-tailwind/react";
 import {useAuth} from "../../../hooks/useAuth";
 import {TUser} from "../ProtectedRoute";
@@ -18,8 +18,10 @@ export function StickyNavbar() {
   const [scrolled, setScrolled] = useState(false);
   const user = useAuth();
   const dispatch = useAppDispatch();
+  const location = useLocation();
+  console.log("loca: ", location.pathname);
   // const token = useAppSelector(useCurrentToken);
-
+  const path = location.pathname === "/login" || "/register";
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -34,7 +36,7 @@ export function StickyNavbar() {
   }, []);
 
   const navList = (
-    <ul className="flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-6">
+    <ul className="lg:ms-0 ms-4 flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-6">
       <Typography
         // key={item}
         as="li"
@@ -52,22 +54,30 @@ export function StickyNavbar() {
         variant="small"
         color="white"
         placeholder={""}
-        className="p-1 font-normal text-lg font-serif"
+        className="p-1  font-normal text-lg font-serif"
       >
         <NavLink to={`/catalogue`} className="flex items-center">
           Catalogue
         </NavLink>
       </Typography>
-      <NavLink
-        className="font-serif"
-        to={
-          (user as TUser)?.role === "seller"
-            ? "/myhub/create-product"
-            : "/myhub/polish-requests"
-        }
+      <Typography
+        as="li"
+        variant="small"
+        color="white"
+        placeholder={""}
+        className="p-1  font-normal text-lg font-serif"
       >
-        My Hub
-      </NavLink>
+        <NavLink
+          className="font-serif"
+          to={
+            (user as TUser)?.role === "seller"
+              ? "/myhub/create-product"
+              : "/myhub/polish-requests"
+          }
+        >
+          My Hub
+        </NavLink>
+      </Typography>
     </ul>
   );
 
@@ -77,6 +87,7 @@ export function StickyNavbar() {
       color="transparent"
       className={` fixed top-0 left-0 bg-transparent rounded-none border-0 shadow-none  right-0 z-50 max-w-full py-4 px-6 
         ${scrolled ? "bg-brown-900" : "bg-none"} 
+        ${path && "bg-bro-900"}
         text-white`}
     >
       <div className="flex items-center justify-between">
@@ -101,7 +112,32 @@ export function StickyNavbar() {
         <div className="hidden lg:block">{navList}</div>
 
         {/* Sign In Button */}
-        <div className="hidden lg:block">
+        <div className=" lg:justify-evenly hidden lg:flex justify-end items-center">
+          <Typography
+            as="li"
+            variant="small"
+            color="white"
+            placeholder={""}
+            className="p-1  font-normal text-lg font-serif"
+          >
+            <NavLink to="/cart" className="me-4 float-right">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+                />
+              </svg>
+            </NavLink>
+          </Typography>
+          {/* <div className="hidden lg:block"> */}
           {user ? (
             <Button
               onClick={() => dispatch(logout())}
@@ -128,7 +164,7 @@ export function StickyNavbar() {
         <IconButton
           placeholder={""}
           variant="text"
-          className="ml-auto h-6 w-6 text-white hover:bg-transparent lg:hidden"
+          className="ml-auto min-h-12 w-6 text-white hover:bg-transparent lg:hidden"
           ripple={false}
           onClick={() => setOpenNav(!openNav)}
         >
@@ -165,11 +201,56 @@ export function StickyNavbar() {
       </div>
 
       {/* Mobile Navigation */}
-      <MobileNav open={openNav} className="bg-brown-900 text-white">
+      <MobileNav open={openNav} className="bg-brown-900 text-white py-3">
         {navList}
-        <Button placeholder={""} fullWidth size="sm">
-          <NavLink to="/register">Register </NavLink>
-        </Button>
+        <div className="flex flex-col justify-evenly gap-3 ps-3">
+          <Typography
+            as="li"
+            variant="small"
+            color="white"
+            placeholder={""}
+            className="p-1  font-normal text-lg font-serif"
+          >
+            <NavLink to="/cart" className="">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+                />
+              </svg>
+            </NavLink>
+          </Typography>
+          <div className="mb-4">
+            {user ? (
+              <Button
+                onClick={() => dispatch(logout())}
+                placeholder={""}
+                // variant="gradient"
+                size="sm"
+                className="font-serif text-white bg-transparent border-2 border-white"
+              >
+                Logout
+              </Button>
+            ) : (
+              <Button
+                placeholder={""}
+                // variant="gradient"
+                size="sm"
+                className="text-white bg-transparent border-2 border-white"
+              >
+                <NavLink to="/login"> Log In </NavLink>
+              </Button>
+            )}
+          </div>{" "}
+        </div>
       </MobileNav>
     </Navbar>
   );

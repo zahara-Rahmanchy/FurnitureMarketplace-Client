@@ -25,7 +25,7 @@ const Login = () => {
       console.log(user);
       dispatch(setUser({user: user, token: res.data.accessToken}));
       navigate("/all-products");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       Swal.fire(err?.data?.errorMessage);
     }
@@ -41,7 +41,7 @@ const Login = () => {
           shadow={false}
         >
           <Typography
-            className=" mx-auto"
+            className=" mx-auto font-grechen text-3xl text-brown-800"
             placeholder={""}
             variant="h4"
             color="blue-gray"
@@ -51,7 +51,7 @@ const Login = () => {
           <Typography
             placeholder={""}
             color="gray"
-            className="mt-1 font-normal text-center"
+            className="mt-1 font-normal text-sm text-center text-brown-800 font-serif"
           >
             Please Login To Access Your Data.
           </Typography>
@@ -59,12 +59,12 @@ const Login = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96 mx-auto"
           >
-            <div className="mb-1 flex flex-col gap-6">
+            <div className="mb-1 flex flex-col gap-6 font-serif">
               <Typography
                 placeholder={""}
                 variant="h6"
                 color="blue-gray"
-                className="-mb-3"
+                className="-mb-3 font-serif"
               >
                 Username
               </Typography>
@@ -85,7 +85,7 @@ const Login = () => {
                 placeholder={""}
                 variant="h6"
                 color="blue-gray"
-                className="-mb-3"
+                className="-mb-3 font-serif"
               >
                 Password
               </Typography>
@@ -103,7 +103,12 @@ const Login = () => {
               />
             </div>
 
-            <Button type="submit" placeholder={""} className="mt-6" fullWidth>
+            <Button
+              type="submit"
+              placeholder={""}
+              className="mt-6 bg-brown-800"
+              fullWidth
+            >
               Login
             </Button>
             <Typography
