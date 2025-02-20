@@ -24,7 +24,7 @@ const Login = () => {
       const user = verifyToken(res.data.accessToken);
       console.log(user);
       dispatch(setUser({user: user, token: res.data.accessToken}));
-      navigate("/all-products");
+      navigate("/catalogue");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       Swal.fire(err?.data?.errorMessage);
@@ -33,6 +33,7 @@ const Login = () => {
   return (
     <>
       {" "}
+      <div className=" bg-brown-800 w-full min-h-[90px]"></div>
       <div>
         <Card
           className="flex flex-col items-center justify-center  h-screen"

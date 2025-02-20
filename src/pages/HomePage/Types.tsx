@@ -28,7 +28,7 @@ const Types = () => {
       </div>
 
       <div
-        className="flex md:flex-row flex-col gap-3 w-full relative mx-auto justify-evenly my-20  
+        className="grid md:grid-cols-6 grid-cols-3 gap-3 md:w-[80%] w-[100%]  place-content-center place-items-center relative mx-auto   items-center justify-center my-20  
      "
       >
         {isLoading && <Spinner />}

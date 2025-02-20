@@ -14,13 +14,13 @@ export function FAQComponent() {
     setOpen(open === value ? 0 : value);
 
   return (
-    <section className="md:w-[70%] mx-auto text-brown-800 font-serif">
-      <h2 className="font-grechen text-4xl text-brown-800 mt-20 mb-10">
+    <section className="w-[70%] mx-auto text-brown-800 font-serif">
+      <h2 className="font-grechen md:text-left text-center text-4xl text-brown-800 mt-20 mb-10">
         Frequently Asked Question!
       </h2>
       <Accordion open={alwaysOpen} placeholder={""}>
         <AccordionHeader
-          className="text-brown-800 font-serif"
+          className="text-brown-800 font-serif "
           placeholder={""}
           onClick={handleAlwaysOpen}
         >
