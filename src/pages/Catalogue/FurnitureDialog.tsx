@@ -5,8 +5,11 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
+  Typography,
 } from "@material-tailwind/react";
 import {TFurniture} from "../Products/utils/types/TFurniture";
+import {useAddToCartRequestMutation} from "../../redux/features/Cart/cartApi";
+import Swal from "sweetalert2";
 interface FurnitureDialogProps {
   open: boolean;
   handleOpen: () => void;
@@ -17,14 +20,32 @@ const FurnitureDialog: React.FC<FurnitureDialogProps> = ({
   handleOpen,
   furniture,
 }) => {
+  const [addToCart, {isLoading, error}] = useAddToCartRequestMutation();
+  // const [disable, setDisable] = useState<boolean>(false);
   if (!furniture) return null; // Prevents errors if no furniture data
+  console.log(furniture);
 
-  const addToCart = (name: string) => {
-    const userConfirmed = window.confirm(
-      `Do you want to buy ${name}? You cannot revert from this!`
-    );
-    if (userConfirmed) {
-      alert(`${name} has been bought successfully!`);
+  const handleAddToCart = async (event: React.MouseEvent) => {
+    event.preventDefault();
+    const cartData = {
+      items: [
+        {
+          product: furniture._id, // product ID
+          quantity: 1, // quantity to add
+          seller: furniture.createdBy, // seller ID
+        },
+      ],
+    };
+    try {
+      // setDisable(true);
+      // Trigger the add to cart mutation
+      await addToCart(cartData).unwrap();
+      alert(String("Added To Cart"));
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      Swal.fire(String(err.data.errorMessage));
+      console.error("Failed to save the post: ", err);
     }
   };
 
@@ -104,13 +125,12 @@ const FurnitureDialog: React.FC<FurnitureDialogProps> = ({
           {" "}
           {furniture.description}
         </p>
-      </DialogBody>
-      <DialogFooter placeholder={""}>
         <Button
           className="bg-brown-500 hover:bg-amber-100 hover:text-brown-900"
           size="sm"
           placeholder={""}
-          onClick={() => addToCart(furniture.name as string)}
+          onClick={handleAddToCart}
+          disabled={isLoading}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -127,6 +147,18 @@ const FurnitureDialog: React.FC<FurnitureDialogProps> = ({
             />
           </svg>
         </Button>
+      </DialogBody>
+      <DialogFooter placeholder={""}>
+        {error && (
+          <Typography
+            placeholder=""
+            variant="small"
+            color="red"
+            className="mt-2"
+          >
+            Error: {error as string}
+          </Typography>
+        )}
       </DialogFooter>
     </Dialog>
   );

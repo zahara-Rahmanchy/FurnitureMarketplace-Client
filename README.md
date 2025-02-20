@@ -32,10 +32,14 @@ Seller Can:
 Buyers Can
 
 - View the Furniutre catalogue.
-- View Products based on filters.
+- View Products based on filters and add to cart.
+- Place order.
 - Search product based on their name, type or category.
 - Make a polish Request and view the current status.
 - Verify a product based on their product Id and its details.
+
+TODO:
+Working on the place order and payment integration
 
 ### Sales Management
 
