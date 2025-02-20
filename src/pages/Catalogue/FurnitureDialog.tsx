@@ -10,6 +10,8 @@ import {
 import {TFurniture} from "../Products/utils/types/TFurniture";
 import {useAddToCartRequestMutation} from "../../redux/features/Cart/cartApi";
 import Swal from "sweetalert2";
+import {useAuth} from "../../hooks/useAuth";
+import {TUser} from "../../components/layout/ProtectedRoute";
 interface FurnitureDialogProps {
   open: boolean;
   handleOpen: () => void;
@@ -21,12 +23,17 @@ const FurnitureDialog: React.FC<FurnitureDialogProps> = ({
   furniture,
 }) => {
   const [addToCart, {isLoading, error}] = useAddToCartRequestMutation();
+  const user = useAuth();
   // const [disable, setDisable] = useState<boolean>(false);
   if (!furniture) return null; // Prevents errors if no furniture data
   console.log(furniture);
 
   const handleAddToCart = async (event: React.MouseEvent) => {
     event.preventDefault();
+    if ((user as TUser)?.role !== "buyer") {
+      alert("Please login as a buyer to add to cart!");
+      return;
+    }
     const cartData = {
       items: [
         {
