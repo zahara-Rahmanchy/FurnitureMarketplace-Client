@@ -19,7 +19,11 @@ import {useGetCartItemsQuery} from "../../redux/features/Cart/cartApi";
 
 const Cart = () => {
   const {data: cart, isLoading} = useGetCartItemsQuery("");
-  console.log(cart);
+  console.log(
+    cart,
+    "\ncart?.data?.result?.items: ",
+    cart?.data?.result?.items[0].product.name
+  );
   const TABLE_HEAD = [
     "Product",
     "Details",
@@ -39,6 +43,7 @@ const Cart = () => {
   return (
     <>
       <div className=" bg-brown-800 w-full min-h-[90px]"></div>
+
       <Card placeholder={""} className="h-full w-[90%] mx-auto mt-20">
         <CardHeader
           placeholder={""}
@@ -78,123 +83,131 @@ const Cart = () => {
               <>
                 {" "}
                 {isLoading && <Spinner />}
-                {cart?.data?.result?.map(
-                  (
-                    {items, quantity}: {items: any; quantity: any},
-                    index: number
-                  ) => {
+                {/* {cart?.data?.result?.items?.map(
+                  ({item}: {item: any}, index: number) => {
                     const isLast = index === cart.data.result.length - 1;
                     const classes = isLast
                       ? "p-4"
-                      : "p-4 border-b border-blue-gray-50";
-
-                    return (
-                      <tr key={items[0]?.product._id}>
-                        {/* Product Image */}
-                        <td className={classes}>
-                          <div className="flex items-center gap-3">
-                            <img
-                              src={items[0]?.product.image}
-                              alt={items[0]?.product.name}
-                              className=" w-[300px] h-60 rounded-md object-contain"
-                            />
-                          </div>
-                        </td>
-
-                        {/* Product Details */}
-                        <td className={classes}>
-                          <Typography
-                            placeholder={""}
-                            variant="small"
-                            color="blue-gray"
-                            className="font-bold"
-                          >
-                            {items[0]?.product.name}
-                          </Typography>
-                          <Typography
-                            placeholder={""}
-                            variant="small"
-                            color="blue-gray"
-                            className="font-bold"
-                          >
-                            Each: ${items[0]?.product.price}
-                          </Typography>
-                          <Typography
-                            placeholder={""}
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal opacity-70"
-                          >
-                            Material: {items[0]?.product.material}
-                          </Typography>
-                          <Typography
-                            placeholder={""}
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal opacity-70"
-                          >
-                            Color: {items[0]?.product.color}
-                          </Typography>
-                          <Typography
-                            placeholder={""}
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal opacity-70"
-                          >
-                            Category: {items[0]?.product.category}
-                          </Typography>
-                          <Typography
-                            placeholder={""}
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal opacity-70"
-                          >
-                            Warranty: {items[0]?.product.warranty}
-                          </Typography>
-                        </td>
-
-                        {/* Product Description */}
-                        <td className={classes}>
-                          <Typography
-                            placeholder={""}
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal text-wrap w-48"
-                          >
-                            {items[0]?.product.description}
-                          </Typography>
-                        </td>
-
-                        {/* Quantity Input */}
-                        <td className={classes}>
-                          <Input
-                            crossOrigin={""}
-                            placeholder={""}
-                            type="number"
-                            min="1"
-                            value={quantity}
-                            //   onChange={e =>
-                            //     updateCartItem({
-                            //       productId: product._id,
-                            //       quantity: Number(e.target.value),
-                            //     })
-                            //   }
-                            className="w-20 border border-gray-300 rounded-md p-2"
+                      : "p-4 border-b border-blue-gray-50"; */}
+                {cart?.data?.result?.items?.map((item: any, index: number) => {
+                  const isLast =
+                    index === cart?.data?.result?.items?.length - 1;
+                  const classes = isLast
+                    ? "p-4"
+                    : "p-4 border-b border-blue-gray-50";
+                  return (
+                    <tr key={item?.product._id}>
+                      {/* Product Image */}
+                      <td className={classes}>
+                        <div className="flex items-center gap-3">
+                          <img
+                            src={item?.product?.image}
+                            alt={item?.product?.name}
+                            className=" w-[300px] h-60 rounded-md object-contain"
                           />
-                        </td>
+                        </div>
+                      </td>
 
-                        {/* Edit Action */}
-                        <td className={classes}>
-                          <Tooltip content="Edit Product">
-                            <IconButton variant="text" placeholder={""}>
-                              <PencilIcon className="h-4 w-4" />
-                            </IconButton>
-                          </Tooltip>
-                        </td>
-                      </tr>
-                    );
-                  }
-                )}
+                      {/* Product Details */}
+                      <td className={classes}>
+                        <Typography
+                          placeholder={""}
+                          variant="small"
+                          color="blue-gray"
+                          className="font-bold"
+                        >
+                          {item?.product?.name}
+                        </Typography>
+                        <Typography
+                          placeholder={""}
+                          variant="small"
+                          color="blue-gray"
+                          className="font-bold"
+                        >
+                          Each: ${item?.product?.price}
+                        </Typography>
+                        <Typography
+                          placeholder={""}
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal opacity-70"
+                        >
+                          Material: {item?.product?.material}
+                        </Typography>
+                        <Typography
+                          placeholder={""}
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal opacity-70"
+                        >
+                          Color: {item?.product?.color}
+                        </Typography>
+                        <Typography
+                          placeholder={""}
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal opacity-70"
+                        >
+                          Category: {item?.product?.category}
+                        </Typography>
+                        <Typography
+                          placeholder={""}
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal opacity-70"
+                        >
+                          Warranty: {item?.product?.warranty}
+                        </Typography>
+                      </td>
+
+                      {/* Product Description */}
+                      <td className={classes}>
+                        <Typography
+                          placeholder={""}
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal text-wrap w-48"
+                        >
+                          {item?.product?.description}
+                        </Typography>
+                      </td>
+
+                      {/* Quantity Input */}
+                      <td className={classes}>
+                        <Input
+                          crossOrigin={""}
+                          placeholder={""}
+                          type="number"
+                          min="1"
+                          value={item?.quantity}
+                          //   onChange={e =>
+                          //     updateCartItem({
+                          //       productId: product._id,
+                          //       quantity: Number(e.target.value),
+                          //     })
+                          //   }
+                          className="w-20 border border-gray-300 rounded-md p-2"
+                        />
+                        <Typography placeholder={""} className="mt-3">
+                          <span className="font-bold text-black">
+                            {" "}
+                            Total Price: $
+                          </span>{" "}
+                          {item?.quantity * item?.product?.price}
+                        </Typography>
+                      </td>
+
+                      {/* Edit Action */}
+                      <td className={classes}>
+                        <Tooltip content="Edit Product">
+                          <IconButton variant="text" placeholder={""}>
+                            <PencilIcon className="h-4 w-4" />
+                          </IconButton>
+                        </Tooltip>
+                      </td>
+                    </tr>
+                  );
+                })}
               </>
             </tbody>
           </table>

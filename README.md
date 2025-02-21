@@ -67,3 +67,5 @@ Working on the place order and payment integration
     - npm run build
 
 ### Live-site link
+
+    - https://furniture-marketplace-client.vercel.app
