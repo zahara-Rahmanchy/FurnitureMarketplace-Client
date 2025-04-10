@@ -33,7 +33,7 @@ const Login = () => {
   return (
     <>
       {" "}
-      <div className=" bg-brown-800 w-full min-h-[90px]"></div>
+      <div className=" bg-brown-800 w-full h-[70px]"></div>
       <div>
         <Card
           className="flex flex-col items-center justify-center  h-screen"

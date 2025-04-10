@@ -86,7 +86,7 @@ export function StickyNavbar() {
   );
 
   const navActions = (
-    <div className="justify-evenly flex lg:flex-row flex-col lg:gap-0 gap-3 lg:ps-0 ps-3  items-start lg:items-center">
+    <div className="justify-evenly  flex lg:flex-row flex-col lg:gap-0 gap-3 lg:ps-0 ps-3  items-start lg:items-center">
       <Badge
         content={user && cart != undefined && cart?.data?.TotalCartItems}
         placement="top-start"
@@ -144,7 +144,7 @@ export function StickyNavbar() {
     <Navbar
       placeholder={""}
       color="transparent"
-      className={` fixed top-0 left-0 bg-transparent rounded-none border-0 shadow-none  right-0 z-50 max-w-full py-2 px-6 
+      className={` fixed py-2 top-0 left-0 bg-transparent rounded-none border-0 shadow-none  right-0 z-50 max-w-full  px-6 
         ${scrolled ? "bg-brown-900" : "bg-none"} 
      
         text-white`}
@@ -261,7 +261,7 @@ export function StickyNavbar() {
       </div>
 
       {/* Mobile Navigation */}
-      <MobileNav open={openNav} className="bg-brown-900 text-white py-3">
+      <MobileNav open={openNav} className="bg-brown-900 text-white">
         {navList}
         {navActions}
         {/* <div className="flex flex-col justify-evenly gap-3 ps-3">
