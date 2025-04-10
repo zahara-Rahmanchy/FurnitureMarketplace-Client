@@ -30,7 +30,7 @@ const Register = () => {
     <>
       {" "}
       <div>
-        <div className=" bg-brown-800 w-full min-h-[90px]"></div>
+        <div className=" bg-brown-800 w-full h-[70px]"></div>
         <Card
           className="flex flex-col items-center justify-center  h-screen"
           placeholder={""}
@@ -38,7 +38,7 @@ const Register = () => {
           shadow={false}
         >
           <Typography
-            className=" mx-auto"
+            className=" mx-auto font-grechen  text-brown-800"
             placeholder={""}
             variant="h4"
             color="blue-gray"
@@ -48,7 +48,7 @@ const Register = () => {
           <Typography
             placeholder={""}
             color="gray"
-            className="mt-1 font-normal text-center"
+            className="mt-1 text-sm text-center text-brown-800 font-serif "
           >
             Please enter your details to create and account.
           </Typography>
@@ -117,20 +117,29 @@ const Register = () => {
                   className: "before:content-none after:content-none",
                 }}
               />
-            </div>
-
-            <div className="">
+               <Typography
+                placeholder={""}
+                variant="h6"
+                color="blue-gray"
+                className="-mb-3"
+              >
+                Role
+              </Typography>
               <select
-                className="p-2 border-none bg-transparent outline-0"
+                className="w-full p-3 border border-blue-gray-200 rounded-md outline-none  focus:!border-t-gray-900 bg-transparent outline-0 cursor-pointer"
                 {...register("role")}
               >
-                <option>Select Role</option>
+                <option className="">Select Role</option>
                 <option value={"seller"}>Seller</option>
                 <option value={"buyer"}>Buyer</option>
               </select>
             </div>
 
-            <Button type="submit" placeholder={""} className="mt-6" fullWidth>
+            <div className="">
+           
+            </div>
+
+            <Button type="submit" placeholder={""} className="mt-6 bg-brown-700" fullWidth>
               Register
             </Button>
             <Typography

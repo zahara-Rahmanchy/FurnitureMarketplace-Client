@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import {
   Button,
@@ -9,9 +10,10 @@ import {
 } from "@material-tailwind/react";
 import {TFurniture} from "../Products/utils/types/TFurniture";
 import {useAddToCartRequestMutation} from "../../redux/features/Cart/cartApi";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import {useAuth} from "../../hooks/useAuth";
 import {TUser} from "../../components/layout/ProtectedRoute";
+
 interface FurnitureDialogProps {
   open: boolean;
   handleOpen: () => void;
@@ -24,13 +26,15 @@ const FurnitureDialog: React.FC<FurnitureDialogProps> = ({
 }) => {
   const [addToCart, {isLoading, error}] = useAddToCartRequestMutation();
   const user = useAuth();
+  console.log("uer:" ,user)
   // const [disable, setDisable] = useState<boolean>(false);
   if (!furniture) return null; // Prevents errors if no furniture data
   console.log(furniture);
 
   const handleAddToCart = async (event: React.MouseEvent) => {
     event.preventDefault();
-    if ((user as TUser)?.role !== "buyer") {
+    // event.stopPropagation()
+     if ((user as TUser)?.role === "seller") {
       alert("Please login as a buyer to add to cart!");
       return;
     }
@@ -47,11 +51,11 @@ const FurnitureDialog: React.FC<FurnitureDialogProps> = ({
       // setDisable(true);
       // Trigger the add to cart mutation
       await addToCart(cartData).unwrap();
-      alert(String("Added To Cart"));
+      alert("Added To Cart");
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      Swal.fire(String(err.data.errorMessage));
+      alert(err.data.errorMessage);
       console.error("Failed to save the post: ", err);
     }
   };
@@ -62,6 +66,7 @@ const FurnitureDialog: React.FC<FurnitureDialogProps> = ({
       open={open}
       handler={handleOpen}
       //   className="w-[80%]"
+      dismiss={{ outsidePress: false }}
       size="xl"
       animate={{
         mount: {scale: 1, y: 0},
@@ -133,7 +138,7 @@ const FurnitureDialog: React.FC<FurnitureDialogProps> = ({
           {furniture.description}
         </p>
         <Button
-          className="bg-brown-500 hover:bg-amber-100 hover:text-brown-900"
+          className=" float-end mt-4 bg-brown-500 hover:bg-amber-100 hover:text-brown-900"
           size="sm"
           placeholder={""}
           onClick={handleAddToCart}
@@ -156,16 +161,18 @@ const FurnitureDialog: React.FC<FurnitureDialogProps> = ({
         </Button>
       </DialogBody>
       <DialogFooter placeholder={""}>
-        {error && (
+      {error && (
           <Typography
             placeholder=""
             variant="small"
             color="red"
             className="mt-2"
           >
-            Error: {error as string}
+            Error: {(error as any)?.data?.errorMessage || "An unexpected error occurred"}
           </Typography>
         )}
+
+
       </DialogFooter>
     </Dialog>
   );
