@@ -8,7 +8,7 @@ import {
   Badge,
 } from "@material-tailwind/react";
 import {NavLink, useLocation} from "react-router-dom";
-// import type {NavbarProps} from "@material-tailwind/react";
+ import { Link } from "react-scroll";
 import {useAuth} from "../../../hooks/useAuth";
 import {TUser} from "../ProtectedRoute";
 import {useAppDispatch} from "../../../redux/hooks";
@@ -80,9 +80,46 @@ export function StickyNavbar() {
               : "/myhub/polish-requests"
           }
         >
-          My Hub
+          Dashboard
         </NavLink>
       </Typography>
+     
+    <Typography
+       as="li"
+       variant="small"
+       color="white"
+       placeholder={""}
+       className="p-1  font-normal text-lg font-serif cursor-pointer"
+      >
+    <Link
+      to="faq-section"
+      smooth={true}
+      duration={500}
+      className="font-serif "
+      offset={-70} // Adjust if you have sticky navbar
+     
+    >
+      FAQ
+    </Link>
+   </Typography>
+   <Typography
+       as="li"
+       variant="small"
+       color="white"
+       placeholder={""}
+       className="p-1  font-normal text-lg font-serif cursor-pointer"
+      >
+    <Link
+      to="new-arrivals"
+      smooth={true}
+      duration={500}
+      offset={-70} // Adjust if you have sticky navbar
+      className="font-serif "
+     
+    >
+      New Arrivals
+    </Link>
+   </Typography>
     </ul>
   );
 

@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {Slide} from "react-awesome-reveal";
+import { Button, Typography } from "@material-tailwind/react";
 const HomeSlider = () => {
   const settings = {
     respondTo: "slider",
@@ -45,10 +46,22 @@ const HomeSlider = () => {
               {/* <Slide> */}{" "}
               <div className=" h-full w-full  bg-opacity-80  p-3 text-center">
                 <Slide direction="down" duration={5000}>
-                  <h1 className="font-grechen mb-5 text-4xl mt-20 font-bold italic text-white border-0 ">
+                  <h1 className="font-grechen mb-5 text-5xl font-bold italic text-white border-0 ">
                     Transform Your Home
                     <br /> with Crafted Comfort
                   </h1>
+                 <h3 className="text-3xl text-white shadow-2xl mb-5"> Furniture that Finds You</h3>
+                 < hr className="w-[50%] mx-auto"/>
+                 <Typography placeholder={""} variant={"paragraph"} className="text-white mt-5">
+                  Not just another marketplace — it’s where your next cozy chair <br/>
+                  or quirky coffee table is waiting. Sell your old stuff or find something with character.
+                 </Typography>
+                 <div className="flex items-center justify-center gap-7">
+                  <Button placeholder={""} className="bg-brown-800 shadow-2xl  text-white my-10"> Explore Furniture</Button>
+                 <Button placeholder={""} variant="outlined" className="bg-border-800 text-white bg-black"> 🛒 Become a Seller</Button>
+                 
+                 </div>
+    
                 </Slide>
               </div>
             </div>
