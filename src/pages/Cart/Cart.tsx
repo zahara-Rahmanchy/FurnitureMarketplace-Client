@@ -16,14 +16,25 @@ import {
 
 import {Card} from "@material-tailwind/react";
 import {useGetCartItemsQuery} from "../../redux/features/Cart/cartApi";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { setCartFromDB } from "../../redux/features/Cart/cartSlice";
 
 const Cart = () => {
   const {data: cart, isLoading} = useGetCartItemsQuery("");
-  console.log(
-    cart,
-    "\ncart?.data?.result?.items: ",
-    cart?.data?.result?.items[0].product.name
-  );
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  console.log(cart,"\ncart?.data?.result?.items: ",cart?.data?.result?.items[0].product.name);
+   useEffect(() => {
+    if (cart?.data?.result?.items?.length) {
+      dispatch(setCartFromDB(cart.data.result.items));
+    }
+  }, [cart, dispatch]);
+
+  // Get items from Redux state for local UI usage & updates
+  const items = useAppSelector(state => state.cart.items);
   const TABLE_HEAD = [
     "Product",
     "Details",
@@ -37,6 +48,7 @@ const Cart = () => {
     );
     if (userConfirmed) {
       alert(`order placed successfully!`);
+      navigate("/checkout")
     }
   };
 
@@ -89,9 +101,9 @@ const Cart = () => {
                     const classes = isLast
                       ? "p-4"
                       : "p-4 border-b border-blue-gray-50"; */}
-                {cart?.data?.result?.items?.map((item: any, index: number) => {
+                {items?.map((item: any, index: number) => {
                   const isLast =
-                    index === cart?.data?.result?.items?.length - 1;
+                    index === items?.length - 1;
                   const classes = isLast
                     ? "p-4"
                     : "p-4 border-b border-blue-gray-50";
@@ -215,7 +227,7 @@ const Cart = () => {
 
         <CardFooter
           placeholder={""}
-          className="flex items-center justify-between border-t border-blue-gray-50 p-4"
+          className="flex items-center justify-end border-t border-blue-gray-50 p-4"
         >
           {/* <Button variant="outlined" size="sm">
             Previous
@@ -247,6 +259,7 @@ const Cart = () => {
             placeholder={""}
             variant="outlined"
             size="sm"
+            className="bg-orange-800 text-white border-gray-300 border-2 shadow-lg"
             onClick={placeOrder}
           >
             Place Order

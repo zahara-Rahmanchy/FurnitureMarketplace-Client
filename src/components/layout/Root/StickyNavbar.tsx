@@ -21,6 +21,7 @@ export function StickyNavbar() {
   const user = useAuth();
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const currentPath= location.pathname
   console.log("loca: ", location.pathname);
   const {data: cart} = useGetCartItemsQuery("");
   console.log("cart: ", cart?.data?.TotalCartItems);
@@ -144,7 +145,8 @@ export function StickyNavbar() {
     <Navbar
       placeholder={""}
       color="transparent"
-      className={` fixed py-2 top-0 left-0 bg-transparent rounded-none border-0 shadow-none  right-0 z-50 max-w-full  px-6 
+      className={` fixed py-2 top-0 left-0 bg-transparent rounded-none border-0 shadow-none  right-0 z-50 max-w-full  px-6
+        ${(currentPath === "/checkout" || currentPath==="/login") && "bg-brown-800"} 
         ${scrolled ? "bg-brown-900" : "bg-none"} 
      
         text-white`}

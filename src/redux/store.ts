@@ -16,7 +16,7 @@ import {baseApi} from "./api/baseApi";
 
 import FurnitureReducer from "./features/FurnitureManagement/furnitureSlice";
 import saleReducer from "./features/SalesManagement/saleSlice";
-
+import cartReducer from "./features/Cart/cartSlice";
 const persistConfig = {
   key: "auth",
   storage,
@@ -30,6 +30,7 @@ export const store = configureStore({
     auth: persistedAuthReducer,
     furniture: FurnitureReducer,
     sale: saleReducer,
+    cart:cartReducer
   },
   middleware: getDefaultMiddlewares =>
     getDefaultMiddlewares({

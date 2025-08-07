@@ -16,83 +16,9 @@ import MainLayout from "../components/layout/Root/MainLayout";
 import TradeDeck from "../components/layout/TradeDeck/TradeDeck";
 import Catalogue from "../pages/Catalogue/Catalogue";
 import Cart from "../pages/Cart/Cart";
+import CheckoutPage from "../pages/Orders/Checkout";
 
-// export const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <App />,
-//     children: [
-//       {
-//         path: "/",
-//         element: <MainLayout />,
-//         children: [
-//           {path: "/", element: <Home />},
-//           {path: "/catalogue", element: <AllProducts />},
-//           {
-//             path: "/hub",
-//             element: (
-//               // <ProtectedRoute role="both">
-//               <TradeDeck />
-//               // </ProtectedRoute>
-//             ),
-//             children: [
-//               {
-//                 path: "create-product",
-//                 element: (
-//                   // <ProtectedRoute role="seller">
-//                   <CreateProduct />
-//                   // </ProtectedRoute>
-//                 ),
-//               },
-//               {
-//                 path: "low-stock",
-//                 element: (
-//                   <ProtectedRoute role="seller">
-//                     <LowStock />
-//                   </ProtectedRoute>
-//                 ),
-//               },
-//               {
-//                 path: "sales-history",
-//                 element: (
-//                   <ProtectedRoute role="seller">
-//                     <SalesHistory />
-//                   </ProtectedRoute>
-//                 ),
-//               },
-//               {
-//                 path: "polish-requests",
-//                 element: (
-//                   <ProtectedRoute role="buyer">
-//                     <PolishRequest />
-//                   </ProtectedRoute>
-//                 ),
-//               },
-//               {
-//                 path: "polish-service",
-//                 element: (
-//                   <ProtectedRoute role="seller">
-//                     <PolishService />
-//                   </ProtectedRoute>
-//                 ),
-//               },
-//               {
-//                 path: "verify-product",
-//                 element: (
-//                   <ProtectedRoute role="buyer">
-//                     <VerifyProduct />
-//                   </ProtectedRoute>
-//                 ),
-//               },
-//             ],
-//           },
-//         ],
-//       },
-//       {path: "login", element: <Login />},
-//       {path: "register", element: <Register />},
-//     ],
-//   },
-// ]);
+
 export const router = createBrowserRouter([
   {
     element: <MainLayout />, // Main Layout for public pages
@@ -105,6 +31,15 @@ export const router = createBrowserRouter([
           <ProtectedRoute role="buyer">
             {" "}
             <Cart />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/checkout",
+        element: (
+          <ProtectedRoute role="buyer">
+            {" "}
+            <CheckoutPage/>
           </ProtectedRoute>
         ),
       },
