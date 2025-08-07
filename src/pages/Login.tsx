@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 // "username":"zahara123",
 //     "password": "123456"
 const Login = () => {
-  const {register, handleSubmit} = useForm();
+  const {register, handleSubmit,setValue} = useForm();
   const navigate = useNavigate();
   const [login, {error}] = useLoginMutation();
   const dispatch = useAppDispatch();
@@ -122,6 +122,32 @@ const Login = () => {
                 Register
               </NavLink>
             </Typography>
+            <hr/>
+           <div className="flex gap-4 justify-center mt-6 md:flex-row flex-col">
+                <Button
+                placeholder={""}
+                  size="sm"
+                  onClick={() => {
+                    setValue("username", "zaharabuyer");
+                    setValue("password", "123456");
+                  }}
+                  className="bg-brown-800 text-white"
+                >
+                  🧚‍♀️ Login as Buyer
+                </Button>
+                <Button
+                placeholder={""}
+                  size="sm"
+                  onClick={() => {
+                    setValue("username", "zahara123");
+                    setValue("password", "123456");
+                  }}
+                  className="bg-black text-white"
+                >
+                  🧙 Login as Seller
+                </Button>
+              </div>
+
           </form>
         </Card>
       </div>
