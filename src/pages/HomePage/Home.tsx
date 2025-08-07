@@ -4,7 +4,7 @@ import Types from "./Types";
 import Gallery from "./Gallery";
 import NewArrivals from "./NewArrivals";
 import Newsletter from "./Newsletter";
-
+import { Element } from "react-scroll";
 const Home = () => {
   return (
     <>
@@ -14,11 +14,14 @@ const Home = () => {
         <HomeSlider />
       </div>
       <Types />
+      <Element name="new-arrivals">
       <NewArrivals/>
-
+      </Element>
       <Gallery />
       <Newsletter/>
-      <FAQComponent />
+      <Element name="faq-section">
+        <FAQComponent />
+       </Element >
     </>
   );
 };
