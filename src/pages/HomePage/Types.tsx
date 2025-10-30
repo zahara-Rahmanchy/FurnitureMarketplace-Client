@@ -1,6 +1,7 @@
 import {Spinner} from "@material-tailwind/react";
 import {useGetAllFurnituresDataQuery} from "../../redux/features/FurnitureManagement/furnitureApi";
 import {TFurniture} from "../Products/utils/types/TFurniture";
+import { Slide } from "react-awesome-reveal";
 
 const Types = () => {
   const {data: Furnitures, isLoading} = useGetAllFurnituresDataQuery("");
@@ -34,13 +35,16 @@ const Types = () => {
         {isLoading && <Spinner />}
         {/* {Furnitures.data[0].type} */}
         {uniqueTypes.map((type: string, index: number) => (
-          <div
+         <Slide direction="up">
+           <div
             key={index}
-            className="rounded-full text-white bg-brown-800 p-2  text-center text-wrap w-24 h-24 hover:w-28 cursor-pointer flex items-center justify-center
+            
+            className="rounded-full border-t-2 border-brown-300 border-r-[6px] border-b-[6px] border-l-2 text-white bg-brown-800 p-2  text-center text-wrap w-24 h-24 hover:w-28 cursor-pointer flex items-center justify-center
           "
           >
             {type}
           </div>
+         </Slide>
         ))}
       </div>
     </>

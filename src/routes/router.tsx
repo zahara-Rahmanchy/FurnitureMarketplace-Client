@@ -17,6 +17,7 @@ import TradeDeck from "../components/layout/TradeDeck/TradeDeck";
 import Catalogue from "../pages/Catalogue/Catalogue";
 import Cart from "../pages/Cart/Cart";
 import CheckoutPage from "../pages/Orders/Checkout";
+import MyOrders from "../pages/Orders/MyOrders";
 
 
 export const router = createBrowserRouter([
@@ -58,6 +59,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {path: "furniture-stock", element: <AllProducts />},
+      {path: "orders", element: <MyOrders />},
       {path: "sales-history", element: <SalesHistory />},
       {path: "create-product", element: <CreateProduct />},
       {path: "low-stock", element: <LowStock />},

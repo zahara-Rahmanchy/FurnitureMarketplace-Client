@@ -68,6 +68,7 @@ const TABLE_HEAD_Buyer = [
 //   }
 // }
 export function FurnitureTable({furnitures}: {furnitures: any}) {
+  console.log("from funrnitue table")
   console.log("item: ", furnitures);
   // accessibility to make changes according to role
   const token = useAppSelector(useCurrentToken);

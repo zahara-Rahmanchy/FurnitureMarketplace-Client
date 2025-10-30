@@ -1,127 +1,69 @@
-// import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {Slide} from "react-awesome-reveal";
-import { Button, Typography } from "@material-tailwind/react";
+import { Slide as AnimateSlide } from "react-awesome-reveal";
+import CommonOverlay from "./CommonOverlay";
 const HomeSlider = () => {
   const settings = {
-    respondTo: "slider",
-
     dots: true,
-    dotsClass: "slick-dots bottom-0", // Position dots at the bottom
-    arrows: true, // Show arrow controls
+    dotsClass: "slick-dots bottom-0",
+    arrows: true,
     infinite: true,
     speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     swipeToSlide: true,
     fade: true,
-
-    autoplay: true, // Enable autoplay
-    autoplaySpeed: 2000, // Set the autoplay speed (in milliseconds)
+    autoplay: true,
+    autoplaySpeed: 2000,
     cssEase: "ease-in",
   };
+
+  const slides = [
+    {
+      bg: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1974&auto=format&fit=crop",
+      overlayOpacity: "bg-brown-900/60",
+      extra: null
+    },
+    {
+      bg: "https://images.unsplash.com/photo-1619218005459-c8651c2f5918?q=80&w=2070&auto=format&fit=crop",
+      overlayOpacity: "bg-brown-900/50",
+      extra: (
+        <AnimateSlide direction="left" duration={1000}>
+          <h2 className="font-grechen text-2xl  font-bold italic text-white">
+            Lounge Aesthetics
+          </h2>
+        </AnimateSlide>
+      ),
+    },
+    {
+      bg: "https://images.unsplash.com/photo-1618222499121-d6528f6d9d77?q=80&w=1932&auto=format&fit=crop",
+      overlayOpacity: "bg-brown-900/50",
+      extra: (
+        <AnimateSlide direction="left" duration={1000}>
+          <h2 className="font-grechen text-2xl  font-bold italic text-white">
+            Bedroom Luxury
+          </h2>
+        </AnimateSlide>
+      ),
+    },
+  ];
+
   return (
-    <div className="w-full m-0 px-0 overflow-hidden bg-blue h-full absolute top-0">
+    <div className="w-full overflow-hidden absolute md:py-auto" >
       <Slider {...settings}>
-        <div className="h-[600px]">
-          {/* <img
-            src="https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
-            className="object-cover w-full h-[600px]"
-          />
-          */}
-          <div
-            className="hero z-10 h-[600px] flex justify-center items-center"
-            style={{
-              backgroundImage: `url("https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          >
-            <div className="absolute inset-0 bg-brown-900 opacity-60"></div>
+        {slides.map((slide, index) => (
+          <div key={index} className="relative h-[600px]">
+            <div
+              className="h-full w-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${slide.bg})` }}
+            >
+            <CommonOverlay extraContent={slide.extra} />
 
-            <div className=" md:hero-content text-center text-neutral-content w-full h-fit">
-              {/* <Slide> */}{" "}
-              <div className=" h-full w-full  bg-opacity-80  p-3 text-center">
-                <Slide direction="down" duration={5000}>
-                  <h1 className="font-grechen mb-5 text-5xl font-bold italic text-white border-0 ">
-                    Transform Your Home
-                    <br /> with Crafted Comfort
-                  </h1>
-                 <h3 className="text-3xl text-white shadow-2xl mb-5"> Furniture that Finds You</h3>
-                 < hr className="w-[50%] mx-auto"/>
-                 <Typography placeholder={""} variant={"paragraph"} className="text-white mt-5">
-                  Not just another marketplace — it’s where your next cozy chair <br/>
-                  or quirky coffee table is waiting. Sell your old stuff or find something with character.
-                 </Typography>
-                 <div className="flex items-center justify-center gap-7">
-                  <Button placeholder={""} className="bg-brown-800 shadow-2xl  text-white my-10"> Explore Furniture</Button>
-                 <Button placeholder={""} variant="outlined" className="bg-border-800 text-white bg-black"> 🛒 Become a Seller</Button>
-                 
-                 </div>
-    
-                </Slide>
-              </div>
             </div>
+            <div className={`absolute inset-0 ${slide.overlayOpacity}`}></div>
           </div>
-        </div>
-
-        {/* backgroundImage: `url("https://i.ibb.co/YZkyXgc/pexels-photo-6966372.jpg")`, */}
-        {/* */}
-        <div className="lg:h-[600px]">
-          <div
-            className="hero z-10 h-[600px] flex justify-center items-center"
-            style={{
-              backgroundImage: `url("https://images.unsplash.com/photo-1619218005459-c8651c2f5918?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          >
-            <div className="absolute inset-0  bg-brown-900 opacity-50"></div>
-
-            <div className=" md:hero-content text-center text-neutral-content w-full h-fit">
-              {/* <Slide> */}{" "}
-              <div className=" h-full w-full  bg-opacity-80  p-3">
-                <Slide direction="left" duration={3000}>
-                  {" "}
-                  <h1 className="font-grechen mb-5 text-4xl  md:w-3/4 mx-auto  mt-20 font-bold italic text-white border-0 ">
-                    Lounge Aesthetics
-                  </h1>
-                </Slide>
-              </div>
-              {/* </Slide> */}
-            </div>
-          </div>
-        </div>
-        <div className="lg:h-[600px]">
-          <div
-            className="hero z-10 h-[600px] flex justify-center items-center"
-            style={{
-              backgroundImage: `url("https://images.unsplash.com/photo-1618222499121-d6528f6d9d77?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          >
-            <div className="absolute inset-0  bg-brown-900 opacity-50"></div>
-
-            <div className=" md:hero-content text-center text-neutral-content w-full h-fit">
-              {/* <Slide> */}{" "}
-              <div className=" h-full w-full  bg-opacity-80  p-3">
-                <Slide direction="left" duration={3000}>
-                  {" "}
-                  <h1 className="font-grechen mb-5 text-4xl  md:w-3/4 mx-auto  mt-20 font-bold italic text-white border-0 ">
-                    Bedroom Luxury
-                  </h1>
-                </Slide>
-              </div>
-              {/* </Slide> */}
-            </div>
-          </div>
-        </div>
+        ))}
       </Slider>
     </div>
   );

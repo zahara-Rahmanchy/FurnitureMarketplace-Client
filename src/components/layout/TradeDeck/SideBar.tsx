@@ -16,6 +16,7 @@ import {
   PowerIcon,
   XMarkIcon,
   Bars3Icon,
+  Square2StackIcon,
 } from "@heroicons/react/24/solid";
 import {
   CheckBadgeIcon,
@@ -215,6 +216,17 @@ export function SideBar() {
                   )}
                 </List>
               </AccordionBody>
+              
+                  {((user as TUser)?.role === "seller" || "buyer") && (
+                    <ListItem placeholder={""}>
+                      <ListItemPrefix placeholder={""}>
+                     <Square2StackIcon  strokeWidth={3} className="h-5 w-5 text-brown-800"/>
+                      </ListItemPrefix>
+                      <NavLink to="/myhub/orders" className={"text-brown-900"}>
+                        My Orders
+                      </NavLink>
+                    </ListItem>
+                  )}
             </Accordion>
             {(user as TUser)?.role === "seller" && (
               <Accordion

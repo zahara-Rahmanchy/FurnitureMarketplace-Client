@@ -2,7 +2,7 @@
 
 import {useState} from "react";
 import {TFurniture} from "../Products/utils/types/TFurniture";
-import {Button} from "@material-tailwind/react";
+import {Button, Typography} from "@material-tailwind/react";
 import FurnitureDialog from "./FurnitureDialog";
 
 const FurnitureCard = ({furnitures}: {furnitures: any}) => {
@@ -16,7 +16,7 @@ const FurnitureCard = ({furnitures}: {furnitures: any}) => {
     setOpen(true); // Open the dialog
   };
   return (
-    <div className="relative z-10 my-20 mx-20 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-20 ">
+    <div className="relative z-10 my-20 mx-20 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-10 ">
       {furnitures.map((item: TFurniture, index: number) => (
         <div
           className="bg-brown-700 w-full flex flex-col h-[300px] items-center justify-center "
@@ -27,9 +27,12 @@ const FurnitureCard = ({furnitures}: {furnitures: any}) => {
             alt={item.name}
             className="h-[13rem] w-full object-cover overflow-hidden "
           />
-          <h4 className=" text-amber-100 py-2">$ {item.price}</h4>
-          <h1 className="text-white font-semibold mb-1 pb-2">{item.name}</h1>
+          <div className="flex justify-between items-center w-full py-4 px-2">
+             <Typography placeholder={""}  className="text-white font-semibold">{item.name}</Typography>
+            <Typography placeholder={""}  className=" text-lg text-nowrap text-amber-100">$ {item.price}</Typography>
+           
 
+          </div>
           <Button
             placeholder={""}
             onClick={() => handleOpen(item)}
