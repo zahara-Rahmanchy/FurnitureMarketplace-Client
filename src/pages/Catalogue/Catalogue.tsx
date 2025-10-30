@@ -13,12 +13,12 @@ const Catalogue = () => {
     useGetAllFurnituresDataQuery(FilterOptions) || {};
   console.log("data chec: ", Furnitures);
   return (
-    <div className="flex flex-col ">
-      <div className="relative h-fit w-full mb-32">
-        <div className="absolute inset-0 bg-brown-900 opacity-50"></div>
+    <div className="flex flex-col bg-[#fef3e5]">
+      <div className="relative w-full pb-32">
+        {/* <div className="absolute inset-0 bg-brown-900 opacity-20"></div> */}
         <img
-          src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          className="w-full h-[500px] object-cover"
+          src="/catalogue.jpg"  
+          className="w-full h-[650px] object-center"
         />
       </div>
 
@@ -34,7 +34,7 @@ const Catalogue = () => {
         to give a premium feel.
       </span>
       <SearchFilter />
-      <div className="mb-10">
+      <div className="">
         {Furnitures !== undefined && (
           <FurnitureCard furnitures={Furnitures.data} />
         )}

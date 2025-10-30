@@ -7,7 +7,18 @@ export default withMT({
       fontFamily: {
         grechen: ['"Grechen Fuemen"', "serif"],
       },
+      keyframes: {
+        shimmerLine: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+      },
+      animation: {
+        shimmerLine: 'shimmerLine 2.5s ease-in-out infinite',
+      }
     },
   },
   plugins: [],
 });
+ 
+      

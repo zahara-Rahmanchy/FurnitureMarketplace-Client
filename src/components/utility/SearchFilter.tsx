@@ -41,7 +41,7 @@ const SearchFilter = () => {
   };
   return (
     <div className="mt-20 md:w-[90%] w-[100%] flex flex-col md:flex-row justify-between mx-auto  items-center">
-      <div className=" border-b-2 justify-start items-center  flex flex-row  sm:flex-row ">
+      <div className=" border-[1px] border-brown-300 rounded-full px-3  justify-start items-center  flex flex-row  sm:flex-row ">
         {/* <div className=""> */}
         <select
           className="text-brown-800 p-2 border-none bg-transparent outline-0  w-20 text-sm font-serif cursor-pointer"
@@ -55,7 +55,7 @@ const SearchFilter = () => {
         </select>
         {/* </div> */}
         <input
-          className={` border-0 outline-0 text-center placeholder:text-right placeholder:text-brown-800 placeholder:my-1 placeholder:text-3xl `}
+          className={`bg-white pe-2 rounded-full outline-0 text-center placeholder:text-right placeholder:text-brown-800 placeholder:my-1 placeholder:text-3xl `}
           type="text"
           onChange={handleSearchChange}
           placeholder="&#x2315;"
