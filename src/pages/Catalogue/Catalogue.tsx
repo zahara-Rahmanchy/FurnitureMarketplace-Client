@@ -18,7 +18,7 @@ const Catalogue = () => {
         {/* <div className="absolute inset-0 bg-brown-900 opacity-20"></div> */}
         <img
           src="/catalogue.jpg"  
-          className="w-full h-[650px] object-center"
+          className="w-full lg:h-[650px] md:h-[20rem] h-[12rem] object-center"
         />
       </div>
 
