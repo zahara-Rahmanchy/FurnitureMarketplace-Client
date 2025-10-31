@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {ChangeEvent, useState} from "react";
 
 import {
   ClearFilter,
@@ -16,6 +16,7 @@ import {
 import {ChevronUpIcon} from "@heroicons/react/16/solid";
 import {useGetAllFurnituresMenuQuery} from "../../redux/features/FurnitureManagement/furnitureApi";
 import {TFurniture} from "../../pages/Products/utils/types/TFurniture";
+import useDeboucedCallback from "../../hooks/useDebouncedCallback";
 const SearchFilter = () => {
   const [selectedOption, setSelectedOption] = useState("name");
   const {data: MenuData} = useGetAllFurnituresMenuQuery("");
@@ -28,16 +29,27 @@ const SearchFilter = () => {
   // query params
   const [minPrice, setMinPrice] = useState<number>();
   const [maxPrice, setMaxPrice] = useState<number>();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleOption = (e: any) => {
+  
+  const handleOption = (e: ChangeEvent<HTMLSelectElement>) => {
     console.log(e.target.value);
     setSelectedOption(e.target.value);
     console.log("option: ", selectedOption);
   };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSearchChange = (e: any) => {
-    console.log("search: ", e);
-    dispatch(setFilterOptions({[selectedOption]: e.target.value}));
+  
+  // const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   console.log("search: ", e);
+  //   dispatch(setFilterOptions({[selectedOption]: e.target.value}));
+  // };
+  const debouncedSearch = useDeboucedCallback(
+    (value: string) => {
+      dispatch(setFilterOptions({ [selectedOption]: value }));
+    },
+    1000,
+    [dispatch, selectedOption]
+  );
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedSearch(e.target.value);
   };
   return (
     <div className="mt-20 md:w-[90%] w-[100%] flex flex-col md:flex-row justify-between mx-auto  items-center">
@@ -58,7 +70,7 @@ const SearchFilter = () => {
           className={`bg-white pe-2 rounded-full outline-0 text-center placeholder:text-right placeholder:text-brown-800 placeholder:my-1 placeholder:text-3xl `}
           type="text"
           onChange={handleSearchChange}
-          placeholder="&#x2315;"
+          // placeholder="&#x2315;"
         />
       </div>
       <div className="flex items-center justify-between gap-4 flex-row mt-7 md:mt-0 text-center">
@@ -85,13 +97,28 @@ const SearchFilter = () => {
             />
           </svg>
         </Button>
-        <Menu placement="right-start">
-          <MenuHandler>
+        <Menu placement="bottom-end" >
+          <MenuHandler >
             <Button
               variant="text"
               size="sm"
               placeholder={""}
-              className="flex flex-col justify-center  bg-transparent text-brown-800"
+              className="flex flex-col justify-center  bg-transparent relative text-brown-800 
+                after:absolute 
+                after:bottom-0 
+                after:left-1/2 
+                after:h-[2px] 
+                after:w-[2rem] 
+                hover:text-black
+                after:bg-brown-700 
+                after:translate-x-[-50%]
+                after:transition-all 
+                after:duration-300 
+                hover:after:w-full
+                hover:bg-inherit
+                hover:border-brown-600
+                hover:border-[0.5px]
+                "
             >
               Filter By
             </Button>
@@ -296,7 +323,7 @@ const SearchFilter = () => {
           </MenuList>
         </Menu>
         <Menu
-          placement="right-start"
+          placement="bottom-end"
           dismiss={{
             itemPress: false,
           }}
@@ -306,7 +333,21 @@ const SearchFilter = () => {
               size="sm"
               placeholder={""}
               variant="text"
-              className="bg-transparent text-brown-800"
+              className="bg-transparent text-brown-800
+               after:absolute 
+                after:bottom-0 
+                after:left-1/2 
+                after:h-[2px] 
+                after:w-[2rem] 
+                hover:text-black
+                after:bg-brown-700 
+                after:translate-x-[-50%]
+                after:transition-all 
+                after:duration-300 
+                hover:after:w-full
+                hover:bg-inherit
+                hover:border-brown-600
+                hover:border-[0.5px]"
             >
               Price Range
             </Button>
