@@ -13,7 +13,7 @@ const Catalogue = () => {
     useGetAllFurnituresDataQuery(FilterOptions) || {};
   console.log("data chec: ", Furnitures);
   return (
-    <div className="flex flex-col bg-[#fef3e5]">
+    <div className="flex flex-col bg-[#fef3e5] pb-40">
       <div className="relative w-full pb-32">
         {/* <div className="absolute inset-0 bg-brown-900 opacity-20"></div> */}
         <img
