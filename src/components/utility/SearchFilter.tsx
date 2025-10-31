@@ -333,7 +333,7 @@ const SearchFilter = () => {
               size="sm"
               placeholder={""}
               variant="text"
-              className="bg-transparent text-brown-800
+              className="bg-transparent text-brown-800 relative
                after:absolute 
                 after:bottom-0 
                 after:left-1/2 
